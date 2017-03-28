@@ -1,0 +1,63 @@
+/*square inside a day-box. necessary css to make it stay inside a responsive square */
+.square{
+	position:  absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+        overflow:hidden;
+}
+
+.content{
+    white-space: nowrap;
+}
+
+/* Boxes for days or weekday names*/
+.day-box, .weekday-box{
+    float: left;
+    /*border: 1px solid #ccc; /*grey*/
+    /* Width is the width of the content area, i.e. doesnt include padding or margin.
+       Percentage defines the width in percent of the containing block
+    */
+
+    width: 14.2857142857%; /*100 divided by 7 (days in week))*/
+    /*margin-right: -1px;
+    margin-bottom: -1px;*/
+    position:relative;
+}
+
+/*Makes a box for a day in the calendar a responsive square*/
+.day-box:before{
+	content: "";
+	display: block;
+	padding-top: 100%; 	/* initial ratio of 1:1*/
+}
+
+/*  for android in basic vertical mode squares are too small, so in this case we keep them responsive rectangles */
+@media (max-width: 480px) {
+   .day-box:before{padding-top: 400% !important;} /*bigger height to squares */
+   .weekday-box {font-size: 90% !important}
+}
+
+.content span, .content time{
+    margin-left: 5%;
+}
+
+/* styles for today box*/
+.today{
+    background-color: #99ccff!important;
+}
+
+.weekday-box{
+    text-align: center;
+    color: #fff; /*white*/
+    font-size: 150%;
+    background: lightslategray;
+}
+
+/*Makes a box for a day in the calendar a responsive square*/
+.day-box:before{
+	content: "";
+	display: block;
+	padding-top: 100%; 	/* initial ratio of 1:1*/
+}

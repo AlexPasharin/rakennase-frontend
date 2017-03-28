@@ -1,0 +1,56 @@
+/* calendar area is hidden by default*/
+/*#calendar_wrapper{
+    display:none;
+}*/
+
+/* Name of the month and year area */
+#calendar-header{
+    font-weight: bold;
+    font-size: 400%;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/*for android  when in "horizontal mode"*/
+@media (max-width: 800px) {
+   #calendar-header{
+       font-size: 150% !important;
+   }
+    }
+
+/*prev month navigation icon*/
+#prev-month span{
+    float:right;
+}
+
+/*prev month navigation icon*/
+#next-month span{
+    float:left;
+}
+
+
+#main_content{
+    /*centering the calendar with a small margin, the precise value may be changed later*/
+  margin: 5%;
+  margin-bottom: 100px !important;
+}
+
+/*divs that contain rows of calendar - first row for weekday names others for days*/
+#month div{
+    clear: both; /*so that this row contains only floating elements it consists of */
+    margin: 0; /* no space rows between  rows. MAYBE WE NEED SOME SPACE?*/
+}
+
+/*special style for the days in the calendar that are from prev or next month*/
+.other-month{
+    background-color: lightgray;
+}
+
+/*  for android in basic vertical mode squares are too small, so in this case we keep them responsive rectangles */
+@media (max-width: 480px) {
+   #prev-month span{ float:left;}
+   #next-month span{float:right;}
+}
+
+.modal { overflow: visible; }
+.modal-body { overflow-y: visible !important; }
