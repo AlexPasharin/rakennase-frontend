@@ -1,5 +1,7 @@
 import React from 'react'
 import moment from 'moment'
+import OverLayTrigger from 'react-bootstrap/lib/OverLayTrigger'
+import Tooltip from 'react-bootstrap/lib/Tooltip'
 
 import UserGreeting from './UserGreeting'
 import Month from './Month'
@@ -154,55 +156,36 @@ function CalendarHeader(props){
 
   const MONTHES = (lang === 'us') ? MONTHES_ENGLISH : MONTHES_FINNISH
 
-  $("#prev_month_icon").attr('title', MONTHES[prevMonth] + ' ' + prevYear).tooltip('fixTitle')
-  $("#next_month_icon").attr('title', MONTHES[nextMonth] + ' ' + nextYear).tooltip('fixTitle')
+  const prevTooltip = (<Tooltip id = "prevMonthToolbar">
+      {MONTHES[prevMonth] + ' ' + prevYear}
+  </Tooltip>)
 
-  function onPrevMonthClick(){
-    onPrevMonth()
-    $("#prev_month_icon").tooltip("hide")
-  }
-
-  function onNextMonthClick(){
-    onNextMonth()
-    $("#next_month_icon").tooltip("hide")
-  }
+  const nextTooltip = (<Tooltip id = "nextMonthToolbar">
+      {MONTHES[nextMonth] + ' ' + nextYear}
+  </Tooltip>)
 
   return (
     <div id= "calendar-header" className = "row">
 
-        <div className ="col-xs-3" id = "prev-month" onClick = {onPrevMonthClick}>
-            <span id="prev_month_icon" className = "glyphicon glyphicon-chevron-left" data-toggle="tooltip"></span>
+        <div className ="col-xs-3" id = "prev-month" onClick = {onPrevMonth}>
+          <OverLayTrigger placement = "left" overlay = {prevTooltip}>
+            <span id="prev_month_icon" className = "glyphicon glyphicon-chevron-left">
+            </span>
+          </OverLayTrigger>
         </div>
 
         <div id ="month-year" className = "col-xs-6" >
             {MONTHES[month] + ' ' + year}
         </div>
 
-        <div className = "col-xs-3" id = "next-month" onClick = {onNextMonthClick}>
-            <span id="next_month_icon" className = "glyphicon glyphicon-chevron-right" data-toggle="tooltip"></span>
-        </div>
+        <div className = "col-xs-3" id = "next-month" onClick = {onNextMonth}>
+            <OverLayTrigger placement = "right" overlay = {nextTooltip}>
+              <span id="next_month_icon" className = "glyphicon glyphicon-chevron-right"></span>
+            </OverLayTrigger>
+      </div>
 
     </div>
   )
-}
-
-function generateCalendarIcon(text, mode, direction){
-    /* Destroying previous icon
-     *
-     * Because of the stupid Bootstrap bug that doesn't allow tooltip title to be changed dynamically,
-     * we have to generate icons for calendar navigation (to prev/next monthes) from the scratch every time
-     * Which is stupid, but BS doesn't allow title to be changed, if we want a nice graphical tooltip
-     * See https://github.com/twbs/bootstrap/issues/14769
-     *
-     * Might get back later to make a better solution for this problem
-     */
-    $("#" + mode + "-month").empty();
-
-    // generating a clickable icon to get to the prev month
-    var iconString = '<span id="' + mode + '_month_icon" class="glyphicon glyphicon-chevron-' + direction + '" data-placement="' + direction + '" data-toggle="tooltip" title = "' + text + '"></span>';
-    var icon = $(iconString);
-    $("#" + mode + "-month").append(icon);
-    icon.tooltip();
 }
 
 export default Calendar
