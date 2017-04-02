@@ -4,17 +4,11 @@ import moment from 'moment';
 
 function CalendarRow(props){
 
-  var date = props.date;
-
-  var week = [];
-  for(let i = 0; i < 7; i++){
-    week.push(<Day date = {date.clone()} key = {i} calendarMonth = {props.month}/>);
-    date.add(1, 'days');
-  }
-
   return (
     <div className = "row list-group">
-      {week}
+      {props.days.map((day, index) =>
+        <Day date = {day.date} thisMonth = {day.thisMonth} exercises = {day.exercises} key = {index}/>
+      )}
     </div>
   );
 

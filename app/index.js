@@ -7,18 +7,25 @@ import WeekdaysRow from './components/WeekdaysRow';
 import CalendarRow from './components/CalendarRow';
 import Month from './components/Month';
 import Calendar from './components/Calendar';
+import CalendarContainer from './containers/CalendarContainer'
 
 var lang = 'fin';
+
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
 
 const App = React.createClass({
 
   render: function(){
 
-    const today = moment();
-
-
     return(
-      <Calendar month = {today.month()} year = {today.year()} lang = {lang} username = {'Alex'}/>
+      <CalendarContainer
+        username = {'alex'}
+        userId= {13}
+        lang = {lang}
+      />
     )
 
   }

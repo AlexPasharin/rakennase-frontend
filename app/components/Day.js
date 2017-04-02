@@ -1,26 +1,22 @@
-import React from 'react';
-import moment from 'moment';
+import React from 'react'
+import moment from 'moment'
 import DayBox from './DayBox'
+import Exercise from './Exercise'
 
 require("../css/Day.css");
 
 function Day(props){
 
-  const day = props.date; // moment object representing the date
-  const today = moment();
-
-  const isToday = day.date()  === today.date() &&
-                  day.month() === today.month() &&
-                  day.year()  === today.year()
+  const {date, thisMonth, exercises} = props
 
   var className = "square";
 
-  if(day.month() !== props.calendarMonth){
+  if(!thisMonth){
     className += " other-month";
   }
-  if(isToday){
-    className += " today";
-  }
+  // if(isToday){
+  //   className += " today";
+  // }
 
   function onClick(e){
       e.preventDefault();
@@ -28,14 +24,16 @@ function Day(props){
 
   return(
     <DayBox
+      date = {date.format("DD.MM.YYYY")}
       type = "day"
       onClick = {onClick}
       >
       <div className = {className}>
         <span className = "badge">
-            {day.date()}
+            {date.date()}
         </span>
         <div className = "content">
+            {exercises.map(exercise => <Exercise time ={exercise.time} sport = {exercise.sport} key = {exercise.exerciseId}/>)}
         </div>
       </div>
     </DayBox>
@@ -43,5 +41,6 @@ function Day(props){
 
 }
 
+//
 
 export default Day;

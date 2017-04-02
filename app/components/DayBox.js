@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-require("../css/Day.css");
+require("../css/Day.css")
 
 
 function DayBox(props){
@@ -11,6 +11,7 @@ function DayBox(props){
 
   return(
     <a href = "#"
+      id = {props.date}
       className = {props.type + "-box list-group-item"}
       onClick = {props.onClick}
       >
@@ -20,4 +21,4 @@ function DayBox(props){
 }
 
 
-export default DayBox;
+export default DayBox

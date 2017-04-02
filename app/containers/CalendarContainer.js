@@ -1,56 +1,62 @@
-import React from 'react';
+import React from 'react'
+import moment from 'moment'
 
-const rootUrl = "http://www.rakennase.com/";
+import Calendar from '../components/Calendar'
 
-const CalendarContainer extends React.Component {
+class CalendarContainer extends React.Component {
 
   constructor(props){
-    super(props);
-    this.state = {userExercises : []};
+    super(props)
+
+    const today = moment()
+    this.state = {
+                  month: today.month(),
+                  year: today.year()
+                }
   }
 
-  componentDidMount(){
+  onPrevMonth(){
+    var prevMonth = this.state.month - 1
+    var prevYear = this.state.year
 
-    let dateFrom = "27.01.2017";
-    let dateTo = "02.03.2017";
+    if(prevMonth < 0){
+      prevMonth = 11
+      prevYear--
+    }
 
+    this.setState({month: prevMonth, year: prevYear})
   }
 
-  render (){
-    <Calendar />
+  onNextMonth(){
+    var nextMonth = this.state.month + 1
+    var nextYear = this.state.year
+
+    if(nextMonth > 11){
+      nextMonth = 0
+      nextYear++
+    }
+
+    this.setState({month: nextMonth, year: nextYear})
   }
 
-  putUserExercises(dateFrom, dateTo){
+  render(){
 
-    var data = "userId=" + this.props.userId + "&dateFrom=" + dateFrom + "&dateTo=" + dateTo;
+    const {month, year} = this.state
+    const {username, userId, lang} = this.props
 
-    $.ajax({
-        method: 'POST',
-        url: rootUrl + "getExercisesOfUser",
-        data: data,
-        dataType: 'json',
-
-        success: function(result){
-            if(result.badData){
-                console.log("Virheellinen syötö");
-            }else{
-                //console.log(result);
-                result.forEach(function(day){
-                  //  console.log(day.date1);
-                    var contentArea = $("[id='" + day.date + "']").find('.content');
-                    day.exercises.forEach(function(exercise){
-                        var newContent = generateExercise(exercise);
-                        contentArea.append(newContent);
-                    });
-                });
-            }
-        },
-
-        error: function(){
-            console.log("Yhteys epäonnistui");
-        }
-    });
-
-
+    return(
+        <Calendar
+          month = {month}
+          year = {year}
+          username = {username}
+          userId = {userId}
+          userExercises = {this.state.userExercises}
+          lang = {lang}
+          onPrevMonth = {this.onPrevMonth.bind(this)}
+          onNextMonth = {this.onNextMonth.bind(this)}
+        />
+    )
+  }
 }
-}
+
+export default CalendarContainer
