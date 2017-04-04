@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 
-import Calendar from '../components/Calendar'
+import Calendar from '../components/calendar/Calendar'
 
 class CalendarContainer extends React.Component {
 

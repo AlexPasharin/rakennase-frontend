@@ -1,35 +1,59 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import moment from 'moment';
-import Day from './components/Day';
-import Weekday from './components/Weekday';
-import WeekdaysRow from './components/WeekdaysRow';
-import CalendarRow from './components/CalendarRow';
-import Month from './components/Month';
-import Calendar from './components/Calendar';
+
+import Header from './components/Header'
 import CalendarContainer from './containers/CalendarContainer'
 
-var lang = 'fin';
+import fi from './intl/fi'
+import en from './intl/en'
+
 
 $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
+    $('[data-toggle="tooltip"]').tooltip()
+    $('body').css('padding-top', parseInt($('#nav_bar').css("height"))+10)
+})
+
+$(window).resize(function () {
+    $('body').css('padding-top', parseInt($('#nav_bar').css("height"))+10)
+})
 
 
-const App = React.createClass({
 
-  render: function(){
+class App extends React.Component{
+
+  constructor() {
+    super()
+    this.state = {lang: 'us'}
+
+    this.onLangChange = newLang => {
+      this.setState({lang: newLang})
+    }
+  }
+
+
+
+  render() {
+    var dict = (this.state.lang == 'us') ? en : fi
 
     return(
-      <CalendarContainer
-        username = {'alex'}
-        userId= {13}
-        lang = {lang}
-      />
+      <div>
+        <Header
+          mode = {'calendar'}
+          lang = {this.state.lang}
+          dict = {dict}
+          onLangChange = {this.onLangChange}
+        />
+        <CalendarContainer
+          username = {'alex'}
+          userId= {13}
+          lang = {this.state.lang}
+        />
+      </div>
     )
 
   }
-})
+}
 
 ReactDom.render(
   <App/>,
