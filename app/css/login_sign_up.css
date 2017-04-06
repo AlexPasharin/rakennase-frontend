@@ -1,36 +1,7 @@
-/* 
-    Created on : 9.2.2017, 9:46:38
-    Author     : Alex
-*/
 
-/* sign up area is hidden by default*/
-
-/* To make jquery and BS work properly*/
-#login_wrapper{
-    display: block;
-}
-
-#signup_wrapper{
-    display:none;
-}
-
-#signup_on_login_nav_btn, #chosen_exercise_error_msn, #exercise_submit_error_msn, .time-update-error-msn{
+#chosen_exercise_error_msn, #exercise_submit_error_msn, .time-update-error-msn{
     color:red;
     font-size:150%;
-}
-
-#forgot_password{
-    color:green;
-    display: inline-block !important; 
-}
-
-.signup_nav_btn, #prev-month, #next-month, #forgot_password{
-    cursor: pointer;
-}
-
-/*Hidden by default*/
-#login_nav_btn, #logout_nav_btn{
-    display:none;
 }
 
 .signup_err_msn{

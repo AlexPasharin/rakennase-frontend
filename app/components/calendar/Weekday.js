@@ -1,22 +1,19 @@
-import React from 'react';
+import React from 'react'
+
+import ListGroupItem from 'react-bootstrap/lib/ListGroupItem'
+
 import DayBox from './DayBox'
 
 require("../../css/Day.css");
 
 function Weekday(props){
-
   return(
-    <DayBox
-      type = "weekday"
-      onClick = {e => preventDefault(e)}
-      >
+    <ListGroupItem className = "weekday-box">
       <span className = "text-xs-center">
         {props.name}
       </span>
-    </DayBox>
+    </ListGroupItem>
   )
-
 }
 
-
-export default Weekday;
+export default Weekday

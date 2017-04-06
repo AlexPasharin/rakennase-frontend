@@ -29,12 +29,6 @@
 }
 
 
-#main_content{
-    /*centering the calendar with a small margin, the precise value may be changed later*/
-  margin: 5%;
-  margin-bottom: 100px !important;
-}
-
 /*divs that contain rows of calendar - first row for weekday names others for days*/
 #month div{
     clear: both; /*so that this row contains only floating elements it consists of */

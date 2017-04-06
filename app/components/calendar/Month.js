@@ -6,14 +6,27 @@ import CalendarRow from './CalendarRow';
 
 require("../../css/Calendar.css");
 
-function Month(props){
+class Month extends React.Component{
 
-  return (
-    <div id = {'month'}>
-      <WeekdaysRow lang = {props.lang}/>
-      {props.rows.map((row, index) => <CalendarRow days = {row} key = {index}/>)}
-    </div>
-  );
+  render(){
+    return (
+      <div id = {'month'}>
+        <WeekdaysRow dict = {this.props.dict}/>
+        {this.props.rows.map((row, index) =>
+          <CalendarRow
+            days = {row}
+            key = {index}
+            userExercises = {this.props.userExercises}
+            onChosenDay = {this.props.onChosenDay}
+          />
+        )}
+      </div>
+    )
+  }
+}
+
+function generateExercise(exercise){
+    return $("<div id ='exer" + exercise.exerciseId + "'><time datetime = '" + exercise.time + "'>" + exercise.time + "</time>" + "<span>" + exercise.sport + "</span></div>");
 }
 
 //PropTypes???

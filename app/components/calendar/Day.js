@@ -1,42 +1,37 @@
 import React from 'react'
+import classNames from 'classnames'
 import moment from 'moment'
+
+import Badge from 'react-bootstrap/lib/Badge'
+
 import DayBox from './DayBox'
 import Exercise from './Exercise'
 
-require("../../css/Day.css");
+require("../../css/Day.css")
 
 function Day(props){
 
   const {date, thisMonth, exercises} = props
-
-  var className = "square";
-
-  if(!thisMonth){
-    className += " other-month";
-  }
-
   var isToday = moment().format("DD.MM.YYYY") === date.format("DD.MM.YYYY")
 
-  if(isToday){
-     className += " today";
-  }
-
   function onClick(e){
-      e.preventDefault();
+      e.preventDefault()
+      props.onClick()
+      $('html,body').scrollTop(0) // jumps to the top of the page
   }
 
   return(
     <DayBox
       date = {date.format("DD.MM.YYYY")}
-      type = "day"
       onClick = {onClick}
-      >
-      <div className = {className}>
-        <span className = "badge">
-            {date.date()}
-        </span>
+    >
+      <div className = {classNames("square", {
+          "other-month": !thisMonth,
+          "today": isToday
+        })}>
+        <Badge>{date.date()}</Badge>
         <div className = "content">
-            {exercises.map(exercise => <Exercise time ={exercise.time} sport = {exercise.sport} key = {exercise.exerciseId}/>)}
+          {exercises.map(exercise => <Exercise time ={exercise.time} sport = {exercise.sport} key = {exercise.exerciseId}/>)}
         </div>
       </div>
     </DayBox>
@@ -44,6 +39,6 @@ function Day(props){
 
 }
 
-//
+//{exercises.map(exercise => <Exercise time ={exercise.time} sport = {exercise.sport} key = {exercise.exerciseId}/>)}
 
 export default Day;

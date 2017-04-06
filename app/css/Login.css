@@ -1,0 +1,16 @@
+#login_wrapper{
+    display: block;
+    margin-top: 10px;
+}
+
+#signup_on_login_nav_btn{
+    color:red;
+    font-size:150%;
+    cursor: pointer;
+}
+
+#forgot_password{
+    color:green;
+    cursor: pointer;
+    display: inline-block !important;
+}
