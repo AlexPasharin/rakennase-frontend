@@ -1,15 +1,23 @@
-import React from 'react';
-import ReactDom from 'react-dom';
-import moment from 'moment';
+import React from 'react'
+import ReactDom from 'react-dom'
+import moment from 'moment'
 
 import Header from './components/Header'
-import LoginForm from './components/login/LoginForm'
+import LoginContainer from './containers/LoginContainer'
+import SignUpContainer from './containers/SignUpContainer'
 import CalendarContainer from './containers/CalendarContainer'
 
 import fi from './intl/fi'
 import en from './intl/en'
 
+global.jQuery = global.$ = require('jquery')
+
+global.rootUrl = "http://www.rakennase.com/"
+
+
 require('./css/General.css')
+
+require('bootstrap')
 
 
 $(document).ready(function(){
@@ -25,7 +33,13 @@ class App extends React.Component{
 
   constructor() {
     super()
-    this.state = {lang: 'us', mode: 'login', userExercises: []}
+    this.state = {
+      username: 'alex',
+      userId: 13,
+      lang: 'us',
+      mode: 'login',
+      userExercises: []
+    }
 
     this.onLangChange = newLang => {
       this.setState({lang: newLang})
@@ -34,42 +48,52 @@ class App extends React.Component{
     this.onModeChange = newMode => {
       this.setState({mode: newMode})
     }
+
+    this.onLogin = (username, userId) => {
+      this.setState({username, userId})
+    }
+
   }
 
   render() {
-    var dict = (this.state.lang === 'us') ? en : fi
+    const {username, userId, mode, lang, userExercises} = this.state
+    const dict = (this.state.lang === 'us') ? en : fi
 
     const onUserExercisesChange = exercises => this.setState({userExercises: exercises})
-
 
     return(
       <div>
         <Header
-          mode = {this.state.mode}
+          mode = {mode}
           dict = {dict}
           onLangChange = {this.onLangChange}
           onModeChange = {this.onModeChange}
           onUserExercisesChange = {onUserExercisesChange}
         />
-        {this.state.mode === 'login' &&
-          <LoginForm
+        {mode === 'login' &&
+          <LoginContainer
             dict = {dict}
             onModeChange = {this.onModeChange}
+            onLogin = {this.onLogin}
           />
         }
-        { this.state.mode === 'calendar' &&
-          <CalendarContainer
-            username = {'alex'}
-            userId= {13}
-            lang = {this.state.lang}
+        { mode === 'signup' &&
+          <SignUpContainer
             dict = {dict}
-            userExercises = {this.state.userExercises}
+          />
+        }
+        { mode === 'calendar' &&
+          <CalendarContainer
+            username = {username}
+            userId= {userId}
+            lang = {lang}
+            dict = {dict}
+            userExercises = {userExercises}
             onUserExercisesChange = {onUserExercisesChange}
           />
         }
       </div>
     )
-
   }
 }
 

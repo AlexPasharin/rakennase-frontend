@@ -35,8 +35,7 @@ class UserExercisesReciever extends React.Component{
   putUserExercises(){
 
     const {userId, firstDayInTheCalendar, lastDayInTheCalendar, onUserExercisesChange} = this.props
-
-    var rootUrl = "http://www.rakennase.com/"
+    
     var dateFrom = firstDayInTheCalendar.format("DD.MM.YYYY")
     var dateTo = lastDayInTheCalendar.format("DD.MM.YYYY")
 

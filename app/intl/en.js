@@ -1,12 +1,19 @@
 export default {
   login: 'Log in',
   logout:'Log out',
-  signup: 'Sign in',
+  signup: 'Sign up',
 
   username: 'Username',
   password: 'Password',
   rememberMe: 'Remember me',
   forgotPassword: 'Forgot your password?',
+
+  wrongLogin: 'Wrong username or password!',
+
+  email: 'Email',
+  passwordAgain: "Password again",
+
+  writeUsername: 'Your username here',
 
   greeting: 'Welcome',
 

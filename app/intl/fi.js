@@ -8,6 +8,13 @@ export default {
   rememberMe: 'Muista minut',
   forgotPassword: 'Unohtuiko salasana?',
 
+  wrongLogin: 'Väärä käyttäjänimi tai salasana!',
+
+  email: 'Sähköposti',
+  passwordAgain: 'Salasana uudelleen',
+
+  writeUsername: 'Kirjoita käyttäjänimesi tähän',
+
   greeting: 'Tervetuloa',
 
   monthes: ['Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesäkuu', 'Heinäkuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu'],

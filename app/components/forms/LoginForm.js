@@ -1,67 +1,48 @@
 import React from 'react'
 
+import Alert from 'react-bootstrap/lib/Alert'
 import Button from 'react-bootstrap/lib/Button'
 import Checkbox from 'react-bootstrap/lib/Checkbox'
 import Col from 'react-bootstrap/lib/Col'
-import ControlLabel from 'react-bootstrap/lib/ControlLabel'
-import FormControl from 'react-bootstrap/lib/FormControl'
 import FormGroup from 'react-bootstrap/lib/FormGroup'
 import Grid from 'react-bootstrap/lib/Grid'
 import Row from 'react-bootstrap/lib/Row'
 
+import FormField from './FormField'
+
 require('../../css/Login.css')
 
-class LoginForm extends React.Component{
+function LoginForm(props){
 
-  constructor(props){
-    super(props)
-    this.state = {
-      username: 'alex',
-      password: 'salainensalasana'
-    }
-  }
-
-  render(){
-    const {dict, onModeChange} = this.props
-
-    const onUsernameChange = event => {
-      this.setState({
-          username: event.target.value
-      })
-    }
-
-    const onPasswordChange = event => {
-      this.setState({
-          password: event.target.value
-      })
-    }
-
-    const onLogin= () => {
-      onModeChange('calendar')
-    }
+    const{username, password, error, dict, onUsernameChange, onPasswordChange, onFocus, onLogin, onSignUp} = props
 
     return (
       <Grid id = "login_wrapper">
         <Row>
           <Col md={6}>
+            { error &&
+              <Alert bsStyle="danger">{dict.wrongLogin}</Alert>
+            }
             <form className="form-horizontal" role="form">
 
-              <LoginFormField
+              <FormField
                 controlId="login_user_name"
                 type={"text"}
                 labelText={dict.username}
-                value = {this.state.username}
+                value = {username}
                 onChange = {onUsernameChange}
                 autoFocus = {true}
+                onFocus = {onFocus}
               />
 
-              <LoginFormField
+              <FormField
                 controlId="login_password"
                 type={"password"}
                 labelText={dict.password}
-                value = {this.state.password}
+                value = {password}
                 onChange = {onPasswordChange}
                 autoFocus = {false}
+                onFocus = {onFocus}
               />
 
               <FormGroup>
@@ -75,7 +56,7 @@ class LoginForm extends React.Component{
                   <Button bsStyle="info" id="login_btn" onClick={onLogin}>{dict.login}</Button>
                 </Col>
                 <Col xs={3} smOffset={3}>
-                  <span id="signup_on_login_nav_btn" onClick={() => onModeChange('signup')}>{dict.signup}</span>
+                  <span id="signup_on_login_nav_btn" onClick={onSignUp}>{dict.signup}</span>
                 </Col>
               </FormGroup>
 
@@ -89,28 +70,6 @@ class LoginForm extends React.Component{
           </Col>
         </Row>
       </Grid>
-    )
-  }
-}
-
-function LoginFormField(props){
-
-  const {controlId, labelText, value, onChange, autoFocus, type} = props
-
-    return(
-      <FormGroup controlId={controlId}>
-        <Col sm={2}>
-          <ControlLabel>{labelText}</ControlLabel>
-        </Col>
-        <Col sm={10}>
-          <FormControl
-            type={type}
-            value = {value}
-            onChange = {onChange}
-            autoFocus = {autoFocus}
-          />
-        </Col>
-      </FormGroup>
     )
 }
 

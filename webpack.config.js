@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + "/app/index.html",
@@ -21,5 +22,11 @@ module.exports =  {
       { test: /\.css$/, loader: "style-loader!css-loader" }
     ]
   },
-  plugins: [HtmlWebpackPluginConfig]
+  plugins: [
+    HtmlWebpackPluginConfig,
+    new webpack.ProvidePlugin({
+           $: "jquery",
+           jQuery: "jquery"
+       })
+  ]
 };
