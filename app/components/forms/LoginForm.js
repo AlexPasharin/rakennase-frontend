@@ -8,7 +8,7 @@ import FormGroup from 'react-bootstrap/lib/FormGroup'
 import Grid from 'react-bootstrap/lib/Grid'
 import Row from 'react-bootstrap/lib/Row'
 
-import FormField from './FormField'
+import LoginFormField from './LoginFormField'
 
 require('../../css/Login.css')
 
@@ -25,7 +25,7 @@ function LoginForm(props){
             }
             <form className="form-horizontal" role="form">
 
-              <FormField
+              <LoginFormField
                 controlId="login_user_name"
                 type={"text"}
                 labelText={dict.username}
@@ -35,7 +35,7 @@ function LoginForm(props){
                 onFocus = {onFocus}
               />
 
-              <FormField
+            <LoginFormField
                 controlId="login_password"
                 type={"password"}
                 labelText={dict.password}

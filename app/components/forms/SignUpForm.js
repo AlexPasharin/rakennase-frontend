@@ -3,71 +3,82 @@ import React from 'react'
 import Grid from 'react-bootstrap/lib/Grid'
 import Row from 'react-bootstrap/lib/Row'
 
-import FormField from './FormField'
+import SignUpFormField from './SignUpFormField'
 
 require('../../css/SignUp.css')
 
 function SignUpForm(props){
 
   const{dict, username, email, password, passwordAgain} = props
-  const{onUsernameChange, onUsernameFocus} = props
-  const{onEmailChange, onEmailFocus} = props
-  const{onPasswordChange, onPasswordFocus} = props
-  const{onPasswordAgainChange, onPasswordAgainFocus} = props
+  const{onUsernameChange, showErrorOnUsername} = props
+  const{onEmailChange, errorOnEmail} = props
+  const{onPasswordChange, passwordWhiteSpace, passwordTooShort, passwordTooLong} = props
+  const{onPasswordAgainChange, errorOnPasswordAgain} = props
+
+  const errorOnPassword = passwordWhiteSpace || passwordTooShort || passwordTooLong
 
   return(
     <Grid id = "signup_wrapper">
       <Row>
         <form className="form-horizontal" role="form">
 
-        <FormField
+        <SignUpFormField
           controlId="sign_up_username_wrapper"
           type={"text"}
           labelText={dict.username}
           value = {username}
           onChange = {onUsernameChange}
           autoFocus = {true}
-          onFocus = {onUsernameFocus}
+          showError = {showErrorOnUsername}
           placeholder = {dict.writeUsername}
         />
 
-        <FormField
+      <SignUpFormField
           controlId="sign_up_email_wrapper"
           type={"emal"}
           labelText={dict.email}
           value = {email}
           onChange = {onEmailChange}
           autoFocus = {false}
-          onFocus = {onEmailFocus}
+          showError = {errorOnEmail}
           placeholder = {dict.writeEmail}
+          errorMsn={dict.errorOnEmail}
         />
 
-        <FormField
+      <SignUpFormField
           controlId="sign_up_password_wrapper"
           type={"password"}
           labelText={dict.password}
           value = {password}
           onChange = {onPasswordChange}
           autoFocus = {false}
-          onFocus = {onPasswordFocus}
+          showError = {errorOnPassword}
           placeholder = {dict.writePassword}
+          errorMsn={passwordErrorMsn()}
         />
 
-        <FormField
+      <SignUpFormField
           controlId="sign_up_password_again_wrapper"
           type={"password"}
           labelText={dict.passwordAgain}
           value = {passwordAgain}
           onChange = {onPasswordAgainChange}
           autoFocus = {false}
-          onFocus = {onPasswordAgainFocus}
+          showError = {errorOnPasswordAgain && !errorOnPassword}
           placeholder = {dict.writePasswordAgain}
+          errorMsn={dict.errorOnPasswordAgain}
         />
 
         </form>
       </Row>
     </Grid>
   )
+
+  function passwordErrorMsn(){
+    if(passwordWhiteSpace) return dict.passwordWhiteSpace
+    if(passwordTooShort) return dict.passwordTooShort
+    if(passwordTooLong) return dict.passwordTooLong
+  }
 
 }
 

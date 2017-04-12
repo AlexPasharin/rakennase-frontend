@@ -25,15 +25,12 @@ class SignUpContainer extends React.Component{
       })
     }
 
-    const onUsernameFocus = () => {}
-
     const onEmailChange = event => {
       this.setState({
           email: event.target.value
       })
     }
 
-    const onEmailFocus = () => {}
 
     const onPasswordChange = event => {
       this.setState({
@@ -41,7 +38,6 @@ class SignUpContainer extends React.Component{
       })
     }
 
-    const onPasswordFocus = () => {}
 
     const onPasswordAgainChange = event => {
       this.setState({
@@ -49,7 +45,14 @@ class SignUpContainer extends React.Component{
       })
     }
 
-    const onPasswordAgainFocus = () => {}
+    const showErrorOnUsername = () => {}
+    const errorOnEmail = !email.match(/.+\@.+\..+[^\.]$/)
+
+    const passwordWhiteSpace = !password.match(/\S/)
+    const passwordTooShort = password.length < 10
+    const passwordTooLong = password.length > 255
+
+    const passwordsDontMatch = password !== passwordAgain
 
     return(
       <SignUpForm
@@ -59,13 +62,15 @@ class SignUpContainer extends React.Component{
         password={password}
         passwordAgain={passwordAgain}
         onUsernameChange={onUsernameChange}
-        onUsernameFocus={onUsernameFocus}
         onEmailChange={onEmailChange}
-        onEmailFocus={onUsernameFocus}
         onPasswordChange={onPasswordChange}
-        onPasswordFocus={onPasswordFocus}
         onPasswordAgainChange={onPasswordAgainChange}
-        onPasswordAgainFocus={onPasswordAgainFocus}
+        showErrorOnUsername={showErrorOnUsername()}
+        errorOnEmail={errorOnEmail}
+        passwordWhiteSpace={passwordWhiteSpace}
+        passwordTooShort={passwordTooShort}
+        passwordTooLong={passwordTooLong}
+        errorOnPasswordAgain={passwordsDontMatch}
       />
     )
   }

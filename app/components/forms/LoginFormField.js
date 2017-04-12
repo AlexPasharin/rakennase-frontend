@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/lib/Col'
 import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 import FormControl from 'react-bootstrap/lib/FormControl'
 
-function FormField(props){
+function LoginFormField(props){
 
   const {controlId, labelText, value, onChange, autoFocus, type, onFocus, placeholder} = props
 
@@ -28,4 +28,4 @@ function FormField(props){
     )
 }
 
-export default FormField
+export default LoginFormField
