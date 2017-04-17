@@ -4,7 +4,7 @@ import moment from 'moment'
 
 import Header from './components/Header'
 import LoginContainer from './containers/LoginContainer'
-import SignUpContainer from './containers/SignUpContainer'
+import SignUpFormContainer from './containers/SignUpFormContainer'
 import CalendarContainer from './containers/CalendarContainer'
 
 import fi from './intl/fi'
@@ -78,8 +78,10 @@ class App extends React.Component{
           />
         }
         { mode === 'signup' &&
-          <SignUpContainer
+          <SignUpFormContainer
             dict = {dict}
+            onModeChange = {this.onModeChange}
+            onLogin = {this.onLogin}
           />
         }
         { mode === 'calendar' &&

@@ -10,16 +10,32 @@ export default {
 
   wrongLogin: 'Väärä käyttäjänimi tai salasana!',
 
-  email: 'Sähköposti',
-  passwordAgain: 'Salasana uudelleen',
-
   writeUsername: 'Kirjoita käyttäjänimesi tähän',
+  usernameTooShort: 'Käyttäjänimi on liian lyhyt (vaaditaan ainakin 3 merkkiä).',
+  usernameTooLong: 'Käyttäjänimi on liian pitkä (sallitaan korkeintaan 29 merkkiä).',
+  usernameNotValid: 'Käyttäjänimi saa sisältää vain kirjamia, numeroita ja alaviiva-symboleja.',
+  usernameExists: 'Käyttäjänimi on varattu! Valitse toinen käyttäjänimi.',
+  usernameBad: 'Käyttäjänimi ei kelpaa! Sallitun käyttäjänimen pituus on 3-30 merkkiä ja se sisältää ainoastaan kirjamia, numeroita tai alaviivamerkkejä.',
 
-  errorOnEmail: 'Sähköpostiosoite ei kelpaa! Syötä oikea sähköpostiosoite.',
+  email: 'Sähköposti',
+  writeEmail:'Kirjoita sähköpostisi tähän',
+  emailNotValid: 'Sähköpostiosoite ei kelpaa! Syötä oikea sähköpostiosoite.',
+
+  writePassword: 'Kirjoita salasanasi tähän',
   passwordWhiteSpace: 'Salasana ei saa koostuu pelkistä välilyönneistä!',
   passwordTooShort: 'Salasana on liian lyhyt! Salasanassa on oltava ainakin 10 merkkiä.',
   passwordTooLong: 'Salasana on liian pitkä!',
-  errorOnPasswordAgain: 'Salasanat eivät täsmää!',
+  passwordBad: "Salasana on liian lyhyt tai liian pitkä (sallittu pituus 10-255 merkkiä) tai koostuu pelkistä välilyönneistä.",
+
+  passwordAgain: 'Salasana uudelleen',
+  writePasswordAgain: 'Kirjoita salasanasi uudelleen tähän',
+  passwordsDontMatch: 'Salasanat eivät täsmää!',
+
+  accept: 'Hyväksyn',
+  terms: 'käyttöehdot',
+  termsNotAccepted: 'Sinun täytyy hyväksyä käyttöehdot',
+
+  connectionProblems: 'Yhteysongelmia! Pahoittelumme....',
 
   greeting: 'Tervetuloa',
 
