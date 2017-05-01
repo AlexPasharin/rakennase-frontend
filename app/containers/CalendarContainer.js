@@ -1,24 +1,31 @@
 import React from 'react'
 import moment from 'moment'
 
-import UserExercisesReciever from './UserExercisesReciever'
+import Calendar from '../components/calendar/Calendar'
 
 class CalendarContainer extends React.Component {
 
   constructor(props){
     super(props)
-
-    const today = moment()
+    const today = props.today
     this.state = {
       month: today.month(),
       year: today.year()
     }
   }
 
+  componentDidMount(){
+    this.getUserExercises(() =>
+      this.props.onDayChange(this.props.today, () =>
+        this.props.unhideCalendar()
+    ))
+  }
+
+
   render(){
 
     const {month, year} = this.state
-    const {username, userId, lang, dict} = this.props
+    const {today, username, userId, lang, dict, chosenDayExercises, onDayChange, show, unhideCalendar, removeExercise} = this.props
     const rows = this.prepareDays()
 
     const onPrevMonth = () => {
@@ -30,7 +37,7 @@ class CalendarContainer extends React.Component {
         prevYear--
       }
 
-      this.setState({month: prevMonth, year: prevYear})
+      this.setState({month: prevMonth, year: prevYear}, this.getUserExercises)
     }
 
     const onNextMonth = () => {
@@ -42,24 +49,21 @@ class CalendarContainer extends React.Component {
         nextYear++
       }
 
-      this.setState({month: nextMonth, year: nextYear})
+      this.setState({month: nextMonth, year: nextYear}, this.getUserExercises)
     }
 
     return(
-        <UserExercisesReciever
-          rows = {rows}
+        <Calendar
           firstDayInTheCalendar = {this.firstDayInTheCalendar}
           lastDayInTheCalendar = {this.lastDayInTheCalendar}
           month = {month}
           year = {year}
-          username = {username}
-          userId = {userId}
-          lang = {lang}
-          dict = {dict}
+          rows = {rows}
           onPrevMonth = {onPrevMonth}
           onNextMonth = {onNextMonth}
           userExercises = {this.props.userExercises}
-          onUserExercisesChange = {this.props.onUserExercisesChange}
+          getUserExercises = {this.getUserExercises}
+          {...this.props}
         />
     )
   }
@@ -121,6 +125,38 @@ class CalendarContainer extends React.Component {
       row.push(newDayObj)
       day.add(1, 'days')
     }
+  }
+
+  getUserExercises(callback){
+
+    const {userId, onUserExercisesChange} = this.props
+
+    const dateFrom = this.firstDayInTheCalendar.format("DD.MM.YYYY")
+    const dateTo = this.lastDayInTheCalendar.format("DD.MM.YYYY")
+
+
+    const data = "userId=" + userId + "&dateFrom=" + dateFrom + "&dateTo=" + dateTo
+    console.log(data)
+    console.log(rootUrl + "getExercisesOfUser")
+
+    const request = $.ajax({
+        method: 'POST',
+        url: rootUrl + "getExercisesOfUser",
+        data: data,
+        dataType: 'json'
+    })
+
+    request.done(function(result){
+        if(result.badData){
+            console.log("Virheellinen syötö")
+        }else{
+            onUserExercisesChange(result, callback)
+        }
+    })
+
+    request.fail(function(){
+      console.log("Yhteys epäonnistui")
+    })
   }
 
 }

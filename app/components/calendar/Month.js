@@ -17,18 +17,12 @@ class Month extends React.Component{
             days = {row}
             key = {index}
             userExercises = {this.props.userExercises}
-            onChosenDay = {this.props.onChosenDay}
+            onDayChange = {this.props.onDayChange}
           />
         )}
       </div>
     )
   }
 }
-
-function generateExercise(exercise){
-    return $("<div id ='exer" + exercise.exerciseId + "'><time datetime = '" + exercise.time + "'>" + exercise.time + "</time>" + "<span>" + exercise.sport + "</span></div>");
-}
-
-//PropTypes???
 
 export default Month;

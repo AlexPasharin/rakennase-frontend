@@ -1,7 +1,13 @@
-/* calendar area is hidden by default*/
-/*#calendar_wrapper{
-    display:none;
-}*/
+/* calendar area is hidden while exercises loading */
+.loading{
+  visibility:hidden;
+}
+
+.ready{
+  visibility: visible;
+}
+
+
 
 /* Name of the month and year area */
 #calendar-header{

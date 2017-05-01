@@ -41,7 +41,12 @@ export default {
 
   monthes: ['Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesäkuu', 'Heinäkuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu'],
   weekdays: ['MA', 'TI', 'KE', 'TO', 'PE', 'LA', 'SU'],
+
   weekdaysFull : ['Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Suunnuntai'],
-  dayProgram: 'Päivän ohjelma: ',
-  emptyProgram: 'Sinulla ei ole mitään ohjelmaa tälle päivälle'
+  dayProgram: 'Päivän ohjelma',
+  emptyProgram: 'Sinulla ei ole mitään ohjelmaa tälle päivälle',
+  remove: 'Poista',
+  update: 'Muokkaa',
+  changeExerciseTime: 'Muuta aika',
+  ready: 'Valmis'
 }

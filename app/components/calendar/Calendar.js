@@ -10,39 +10,19 @@ require("../../css/Calendar.css")
 
 class Calendar extends React.Component{
 
-  constructor(props){
-    super(props)
-    this.state = {
-      chosenDayExercises: null
-    }
-
-    this.onChosenDay = (day) => {
-      return () => {
-        let dayExercises = this.props.userExercises.find(obj => obj.date === day.format("DD.MM.YYYY"))
-        dayExercises = dayExercises ? dayExercises.exercises : []
-
-        this.setState({chosenDayExercises:
-          {
-            day: day,
-            exercises: dayExercises
-          }
-        })}
-    }
-  }
-
   render(){
-    const {month, year, rows, username, userExercises, lang, dict, onPrevMonth, onNextMonth} = this.props
+    const {month, year, onDayChange, chosenDayExercises, rows, username, userExercises, lang, dict, onPrevMonth, onNextMonth, changeExerciseTime, removeExercise, show} = this.props
 
     return(
-      <div id="calendar_wrapper">
+      <div id="calendar_wrapper" className = {show ? 'ready' : 'loading'}>
         <UserGreeting username = {username} dict = {dict}/>
-        {this.state.chosenDayExercises &&
-          <DayExercises
-            lang = {lang}
-            dict = {dict}
-            exercises = {this.state.chosenDayExercises}
-          />
-        }
+        <DayExercises
+          lang = {lang}
+          dict = {dict}
+          exercises = {chosenDayExercises}
+          changeExerciseTime = {changeExerciseTime}
+          removeExercise = {removeExercise}
+        />
         <CalendarHeader
           month = {month}
           year = {year}
@@ -54,14 +34,10 @@ class Calendar extends React.Component{
           rows = {rows}
           userExercises = {userExercises}
           dict = {dict}
-          onChosenDay = {this.onChosenDay}
+          onDayChange={onDayChange}
         />
       </div>
-    )
-
-  }
-
-
+    )}
 }
 
 export default Calendar

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Panel from 'react-bootstrap/lib/Panel'
+import PanelExercise from './PanelExercise'
 
 import {weekDay} from './utils'
 
@@ -10,6 +11,13 @@ function DayExercises(props) {
   const weekday = props.dict.weekdaysFull[weekDay(day, props.lang)]
   const dayFormatted = day.format("DD.MM.YYYY")
   const exercises = props.exercises.exercises
+
+  const timeTaken = (time, index) => {
+    for(var i = 0; i < exercises.length; i++){
+      if(i !== index && exercises[i].time === time) return true
+    }
+    return false
+  }
 
   return (
     <Panel id = "dayExercises">
@@ -23,7 +31,16 @@ function DayExercises(props) {
       </div>
       {exercises.length === 0 ?
         <p>{props.dict.emptyProgram}</p> :
-        exercises.map(exercise => <p key={exercise.exerciseId}>{exercise.time + ' ' + exercise.sport}</p>
+        exercises.map((exercise, index) =>
+          <PanelExercise
+            key={exercise.exerciseId}
+            time={exercise.time}
+            sport={exercise.sport}
+            dict={props.dict}
+            changeExerciseTime={(newTime) => props.changeExerciseTime(index, newTime, exercise.exerciseId)}
+            removeExercise={() => props.removeExercise(index, exercise.exerciseId)}
+            timeTaken={(time) => timeTaken(time, index)}
+          />
       )}
     </Panel>
   )

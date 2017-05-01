@@ -41,7 +41,12 @@ export default {
 
   monthes: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
   weekdays: ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'],
+
   weekdaysFull : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
   dayProgram: 'Program of the day',
-  emptyProgram: 'You have no program for this day'
+  emptyProgram: 'You have no program for this day',
+  remove: 'Remove',
+  update: 'Update',
+  changeExerciseTime: 'Change time',
+  ready: 'Ready'
 }
