@@ -40,5 +40,8 @@ export default {
   greeting: 'Tervetuloa',
 
   monthes: ['Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesäkuu', 'Heinäkuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu'],
-  weekdays: ['MA', 'TI', 'KE', 'TO', 'PE', 'LA', 'SU']
+  weekdays: ['MA', 'TI', 'KE', 'TO', 'PE', 'LA', 'SU'],
+  weekdaysFull : ['Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Suunnuntai'],
+  dayProgram: 'Päivän ohjelma: ',
+  emptyProgram: 'Sinulla ei ole mitään ohjelmaa tälle päivälle'
 }

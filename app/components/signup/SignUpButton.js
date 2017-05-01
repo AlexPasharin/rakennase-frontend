@@ -24,7 +24,6 @@ function SignUpButton(props){
           showErrors(result)
         }else{
           onLogin(username, result.userId)
-          onModeChange('calendar')
         }
       },
       error: function(){

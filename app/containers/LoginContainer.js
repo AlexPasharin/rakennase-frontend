@@ -6,7 +6,7 @@ class LoginContainer extends React.Component{
 
   constructor(props){
     super(props)
-    
+
     this.state = {
       usernameInput: 'alex',
       passwordInput: 'salainensalasana',
@@ -50,7 +50,6 @@ class LoginContainer extends React.Component{
             data: "username=" + usernameInput + "&password=" + passwordInput,
             dataType: 'json',
             success: function(result){
-                console.log(result)
                 if(result.login === '1'){
                     onLogin(usernameInput, result.userId)
                     onModeChange('calendar')

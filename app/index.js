@@ -50,7 +50,7 @@ class App extends React.Component{
     }
 
     this.onLogin = (username, userId) => {
-      this.setState({username, userId})
+      this.setState({username, userId}, () => this.onModeChange('calendar'))
     }
 
   }

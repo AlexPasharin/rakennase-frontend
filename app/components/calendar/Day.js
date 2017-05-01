@@ -18,6 +18,7 @@ function Day(props){
       e.preventDefault()
       props.onClick()
       $('html,body').scrollTop(0) // jumps to the top of the page
+      $('#dayExercises').slideDown()
   }
 
   return(

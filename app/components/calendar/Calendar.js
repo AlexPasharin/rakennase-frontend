@@ -37,7 +37,11 @@ class Calendar extends React.Component{
       <div id="calendar_wrapper">
         <UserGreeting username = {username} dict = {dict}/>
         {this.state.chosenDayExercises &&
-          <DayExercises exercises = {this.state.chosenDayExercises} />
+          <DayExercises
+            lang = {lang}
+            dict = {dict}
+            exercises = {this.state.chosenDayExercises}
+          />
         }
         <CalendarHeader
           month = {month}
