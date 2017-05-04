@@ -48,5 +48,12 @@ export default {
   remove: 'Remove',
   update: 'Update',
   changeExerciseTime: 'Change time',
-  ready: 'Ready'
+  ready: 'Ready',
+
+  addExercise: 'Add new exercise: ',
+  exerciseName: 'Name of the exercise: ',
+  exerciseExample: 'for example jogging',
+  exerciseTime: 'Time: ',
+  timeExample: 'for example 8.00',
+  submitExercise: 'Submit'
 }

@@ -11,7 +11,7 @@ require("../../css/Calendar.css")
 class Calendar extends React.Component{
 
   render(){
-    const {month, year, onDayChange, chosenDayExercises, rows, username, userExercises, lang, dict, onPrevMonth, onNextMonth, changeExerciseTime, removeExercise, show} = this.props
+    const {month, year, onDayChange, chosenDayExercises, rows, username, userExercises, lang, dict, onPrevMonth, onNextMonth, addExercise, changeExerciseTime, removeExercise, show} = this.props
 
     return(
       <div id="calendar_wrapper" className = {show ? 'ready' : 'loading'}>
@@ -20,6 +20,7 @@ class Calendar extends React.Component{
           lang = {lang}
           dict = {dict}
           exercises = {chosenDayExercises}
+          addExercise={addExercise}
           changeExerciseTime = {changeExerciseTime}
           removeExercise = {removeExercise}
         />

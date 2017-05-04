@@ -1,7 +1,9 @@
 import React from 'react'
 
 import Button from 'react-bootstrap/lib/Button'
+import Col from 'react-bootstrap/lib/Col'
 import FormControl from 'react-bootstrap/lib/FormControl'
+import Row from 'react-bootstrap/lib/Row'
 
 import {checkTime} from './utils'
 
@@ -28,7 +30,7 @@ class PanelExercise extends React.Component{
     }
 
     const updateTime = event => {
-      const newTime = this.state.time
+      const newTime = checkTime(this.state.time)
 
       if(newTime === false){
         console.log("Anna aika muodossa HH:MM tai HH.MM")
@@ -47,16 +49,21 @@ class PanelExercise extends React.Component{
     }
 
     return(
-      <div>
-        { updateMode ?
-          <FormControl
-            type = "text"
-            value = {time}
-            onChange = {onTimeChange}
-          /> :
-          <time dateTime = {time}>{time}</time>
-        }
-        <span>{sport}</span>
+      <Row>
+        <Col sm={2}>
+          { updateMode ?
+            <FormControl
+              type = "text"
+              value = {time}
+              onChange = {onTimeChange}
+            /> :
+            <time dateTime = {time}>{time}</time>
+          }
+        </Col>
+        <Col sm={2}>
+          <span>{sport}</span>
+        </Col>
+        <Col sm={2}>
         { updateMode ?
           (<Button onClick = {updateTime}
            >
@@ -66,10 +73,13 @@ class PanelExercise extends React.Component{
             {dict.changeExerciseTime}
           </Button>)
         }
-        <Button onClick = {removeExercise}>
-          {dict.remove}
-        </Button>
-      </div>
+        </Col>
+        <Col sm={2}>
+          <Button onClick = {removeExercise}>
+            {dict.remove}
+          </Button>
+        </Col>
+      </Row>
     )
   }
 }

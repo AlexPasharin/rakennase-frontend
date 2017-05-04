@@ -138,25 +138,25 @@ class CalendarContainer extends React.Component {
     const data = "userId=" + userId + "&dateFrom=" + dateFrom + "&dateTo=" + dateTo
     console.log(data)
     console.log(rootUrl + "getExercisesOfUser")
+    //const getUserExercises = () => getUserExercises(callback)
 
-    const request = $.ajax({
+    $.ajax({
         method: 'POST',
         url: rootUrl + "getExercisesOfUser",
         data: data,
-        dataType: 'json'
-    })
-
-    request.done(function(result){
-        if(result.badData){
-            console.log("Virheellinen syötö")
-        }else{
-            onUserExercisesChange(result, callback)
+        dataType: 'json',
+        success: function(result){
+            if(result.badData){
+                console.log("Virheellinen syötö")
+            }else{
+                onUserExercisesChange(result, callback)
+            }
+        },
+        error: function(){
+          console.log("Fail")
         }
     })
 
-    request.fail(function(){
-      console.log("Yhteys epäonnistui")
-    })
   }
 
 }

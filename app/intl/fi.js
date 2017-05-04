@@ -48,5 +48,12 @@ export default {
   remove: 'Poista',
   update: 'Muokkaa',
   changeExerciseTime: 'Muuta aika',
-  ready: 'Valmis'
+  ready: 'Valmis',
+
+  addExercise: 'Lisää uusi harjoitus: ',
+  exerciseName: 'Harjoituksen nimi: ',
+  exerciseExample: 'esim juoksu',
+  exerciseTime: 'Kellon aika: ',
+  timeExample: 'esim 8.00',
+  submitExercise: 'Lähetä'
 }

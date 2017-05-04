@@ -69,6 +69,10 @@ class App extends React.Component{
 
     this.unhideCalendar = () => this.setState({showCalendar: true})
 
+    this.addExercise = (sport, time) => {
+      this.addExerciseInTheState(sport, time)
+    }
+
     this.removeExercise = (index, exerciseId) => {
       const removeFromTheState = () => this.removeExerciseFromTheState(index)
 
@@ -103,7 +107,6 @@ class App extends React.Component{
           }else if(result.timeTaken){
             console.log("Sinulla on jo ohjelmaa tähän aikaan")
           }
-
         }
       })
     }
@@ -153,12 +156,39 @@ class App extends React.Component{
             onUserExercisesChange = {this.onUserExercisesChange}
             onDayChange = {this.onDayChange}
             unhideCalendar = {this.unhideCalendar}
+            addExercise={this.addExercise}
             changeExerciseTime = {this.changeExerciseTime}
             removeExercise = {this.removeExercise}
           />
         }
       </div>
     )
+  }
+
+  addExerciseInTheState(sport, time){
+    const newExercises = this.state.chosenDayExercises.exercises.slice()
+
+    for(var i = 0; i < newExercises.length; i++){
+      if(newExercises[i].time > time){
+        break
+      }
+    }
+    newExercises.splice(i, 0, {sport, time, exerciseId: Math.floor(Math.random() * 100)})
+
+    const day = this.state.chosenDayExercises.day
+    const newUserExercises = this.state.userExercises.slice()
+    let newDayExercises = newUserExercises.find(obj => obj.date === day.format("DD.MM.YYYY"))
+
+     if(newDayExercises) Object.assign(newDayExercises, {exercises: newExercises})
+     else{
+       newDayExercises = {date: day.format("DD.MM.YYYY"), exercises: []}
+       newUserExercises.push(newDayExercises)
+     }
+
+    this.setState(prevState => ({
+      chosenDayExercises: Object.assign(prevState.chosenDayExercises, {exercises: newExercises}),
+      userExercises: newUserExercises
+    }))
   }
 
   removeExerciseFromTheState(index){
@@ -197,7 +227,6 @@ class App extends React.Component{
       chosenDayExercises: Object.assign(prevState.chosenDayExercises, {exercises: newExercises}),
       userExercises: newUserExercises
     }))
-
   }
 
 }
