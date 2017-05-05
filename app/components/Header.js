@@ -17,7 +17,9 @@ function Header(props){
     <Navbar fixedTop collapseOnSelect id="nav_bar">
         <Navbar.Header>
             <Navbar.Toggle/>
-            <Navbar.Brand><span>{'Rakenna se!'}</span></Navbar.Brand>
+            <Navbar.Brand>
+              <span id="brand" onClick={changeMode('frontpage')}>{'Rakenna se!'}</span>
+            </Navbar.Brand>
         </Navbar.Header>
 
         <Navbar.Collapse>
@@ -41,6 +43,7 @@ function Header(props){
                       onModeChange('login')
                     }}>
                     <Glyphicon glyph="log-out"/>{' ' + dict.logout}</NavItem>
+      case('frontpage'):
       case('signup'):
           return <NavItem onClick = {changeMode('login')}><Glyphicon glyph="log-in"/>{' ' + dict.login}</NavItem>
       default:

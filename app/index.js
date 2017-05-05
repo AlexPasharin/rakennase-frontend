@@ -3,6 +3,7 @@ import ReactDom from 'react-dom'
 import moment from 'moment'
 
 import Header from './components/Header'
+import Frontpage from './components/Frontpage'
 import LoginContainer from './containers/LoginContainer'
 import SignUpFormContainer from './containers/SignUpFormContainer'
 import CalendarContainer from './containers/CalendarContainer'
@@ -13,7 +14,6 @@ import en from './intl/en'
 global.jQuery = global.$ = require('jquery')
 
 global.rootUrl = "http://www.rakennase.com/"
-
 
 require('./css/General.css')
 
@@ -30,7 +30,6 @@ $(window).resize(function () {
 })
 
 class App extends React.Component{
-
   constructor() {
     super()
     const today = moment()
@@ -39,7 +38,7 @@ class App extends React.Component{
       username: 'alex',
       userId: 13,
       lang: 'us',
-      mode: 'login',
+      mode: 'frontpage',
       userExercises: [],
       chosenDayExercises: {day: today, exercises: []},
       showCalendar: false
@@ -126,6 +125,9 @@ class App extends React.Component{
           onModeChange = {this.onModeChange}
           onUserExercisesChange = {this.onUserExercisesChange}
         />
+        {mode === 'frontpage' &&
+          <Frontpage />
+        }
         {mode === 'login' &&
           <LoginContainer
             dict = {dict}
