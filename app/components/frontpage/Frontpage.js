@@ -10,7 +10,7 @@ function Frontpage(props){
     {name: 'Aleksandr Pasharin', photoSrc: '../kuvat/profile_alex.jpg', textIndex: 'Alex'},
     {name: 'Mikko Saarinen', photoSrc: '../kuvat/profile_mikko.jpg', textIndex: ''},
     {name: 'Jussi Selänen', photoSrc: '../kuvat/profile_jussi.jpg', textIndex: 'Jussi'},
-    {name: 'Tuomas H', photoSrc: '', textIndex: ''},
+    {name: 'Tuomas Huttunen', photoSrc: '', textIndex: ''},
   ]
 
   return (
@@ -63,7 +63,7 @@ function Frontpage(props){
                     <a><i className="fa fa-5x fa-fw fa-facebook"></i></a>
                 </div>
                 <div className="col-xs-3 text-center">
-                    <a><i className="fa fa-5x fa-fw fa-github"></i></a>
+                    <a href = "https://github.com/AlexPasharin/rakennase-frontend"><i className="fa fa-5x fa-fw fa-github"></i></a>
                 </div>
             </div>
         </div>

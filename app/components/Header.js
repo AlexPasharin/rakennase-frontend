@@ -24,7 +24,20 @@ function Header(props){
 
         <Navbar.Collapse>
             <Nav pullRight>
-              {buttonFactory()}
+              {(mode === 'signup' || mode === 'frontpage') &&
+              <NavItem onClick = {changeMode('login')}><Glyphicon glyph="log-in"/>{' ' + dict.login}</NavItem>
+              }
+              {(mode === 'login' || mode === 'frontpage') &&
+              <NavItem onClick = {changeMode('signup')}><Glyphicon glyph="user"/>{' ' + dict.signup}</NavItem>
+              }
+              {mode === 'calendar' &&
+              <NavItem onClick = {() => {
+                            onUserExercisesChange([])
+                            onModeChange('frontpage')
+                          }}>
+                <Glyphicon glyph="log-out"/>{' ' + dict.logout}
+              </NavItem>
+              }
               <NavItem onClick = {changeLanguage('fi')}>{'FI'}</NavItem>
               <NavItem onClick = {changeLanguage('us')}>{'EN'}</NavItem>
             </Nav>
@@ -44,6 +57,12 @@ function Header(props){
                     }}>
                     <Glyphicon glyph="log-out"/>{' ' + dict.logout}</NavItem>
       case('frontpage'):
+        return (
+          <div>
+          <NavItem onClick = {changeMode('login')}><Glyphicon glyph="log-in"/>{' ' + dict.login}</NavItem>
+          <NavItem onClick = {changeMode('signup')}><Glyphicon glyph="user"/>{' ' + dict.signup}</NavItem>
+          </div>
+        )
       case('signup'):
           return <NavItem onClick = {changeMode('login')}><Glyphicon glyph="log-in"/>{' ' + dict.login}</NavItem>
       default:

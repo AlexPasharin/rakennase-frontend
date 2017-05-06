@@ -10,6 +10,7 @@ import CalendarContainer from './containers/CalendarContainer'
 
 import fi from './intl/fi'
 import en from './intl/en'
+import {checkTime} from './components/calendar/utils'
 
 global.jQuery = global.$ = require('jquery')
 
@@ -69,7 +70,33 @@ class App extends React.Component{
     this.unhideCalendar = () => this.setState({showCalendar: true})
 
     this.addExercise = (sport, time) => {
-      this.addExerciseInTheState(sport, time)
+      time = checkTime(time)
+      if(!time) return
+
+      const {userId, chosenDayExercises} = this.state
+      const date = chosenDayExercises.day.format('DD.MM.YYYY')
+      const addInTheState = id => {this.addExerciseInTheState(sport, time, id)}
+
+      const data = "userId=" + userId + "&exerciseName=" + sport + "&date=" + date + "&time=" + time
+      console.log(data)
+
+      $.ajax({
+        method: 'POST',
+        url: rootUrl + "saveExerciseSimple",
+        data: data,
+        dataType: 'json',
+
+        success: function(result){
+          console.log(result)
+            if(result.hasOwnProperty(exerciseId)){
+              this.addExerciseInTheState(sport, time, result.exerciseId)
+            }
+            else{/*console.log("something's wrong")*/}
+        },
+        error: function(){
+          console.log("error")
+        }
+      })
     }
 
     this.removeExercise = (index, exerciseId) => {
@@ -90,7 +117,7 @@ class App extends React.Component{
 
     this.changeExerciseTime = (index, newTime, exerciseId) => {
       const changeInTheState = () => this.changeExerciseTimeInTheState(index, newTime)
-      const date = this.state.chosenDayExercises.day.format("DD.MM.YYYY")
+      const date = this.state.chosenDayExercises.day.format('DD.MM.YYYY')
 
       $.ajax({
         method: 'POST',
@@ -167,7 +194,7 @@ class App extends React.Component{
     )
   }
 
-  addExerciseInTheState(sport, time){
+  addExerciseInTheState(sport, time, id){
     const newExercises = this.state.chosenDayExercises.exercises.slice()
 
     for(var i = 0; i < newExercises.length; i++){
@@ -175,7 +202,7 @@ class App extends React.Component{
         break
       }
     }
-    newExercises.splice(i, 0, {sport, time, exerciseId: Math.floor(Math.random() * 100)})
+    newExercises.splice(i, 0, {sport, time, exerciseId: id})
 
     const day = this.state.chosenDayExercises.day
     const newUserExercises = this.state.userExercises.slice()
