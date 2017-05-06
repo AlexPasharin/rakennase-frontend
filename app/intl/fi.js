@@ -1,4 +1,24 @@
 export default {
+  frontpageHeader: 'Toivota tervetulleeksi energisempi elämä!',
+  frontpageSubheader: 'Astu mukaan porukkaamme ja olet jo askeleen lähempänä unelmiesi kehoa',
+  frontpageMainText: `Palvelumme "Rakenna se" tarjoaa sinulle mahdollisuuden ja avun rakentaa
+                      unelmiesi kehon tai vähintään syyn nousta sohvalta lenkkipolulle. Palvelu
+                      tarjoaa kattavan ja monipuolisen treenikalenterin jonne saat itse lisättyä
+                      juuri sellaisia treenejä kun haluat. Voit halutessasi valita myös
+                      meidän tarkoin sunnittelemistamme treeniohjelmista sinulle sopivan.
+                      Palvelu tukee kehittymistäsi olit sitten kehonrakenta tai sohvaperuna joka tidostaa,
+                      että liikunta on hyvästä. Mahdollisuutesi päästä tavoitteisiisi paranevat
+                      100% varmuudella.`,
+  nutritionTipHeader:  'Viikon ruoka vinkki',
+  nutritionTip: `Tämän viikon Vinkkina on kaikkien rakastama tonnikala salaatti. Salattiin
+                  saat lisää porkua lisäämäällä hieman chilikastiketta. Ruokaisuutta saat
+                  puolestaan lisäämällä pastaa joukkoon. Monipuolisuudesta johtuen ruokaa
+                  sopii hyvin talouksiin missä ruokavaliot poikkeavat toisistaan.`,
+  developersHeader: 'Kehittäjät',
+  developersGeneralText: 'Olemme enemmän tai vähemmän urheilusta kiinnostuneita tietotekniikan opiskelijoita.',
+  developerAlexText: 'Matemaatikko, koodari, opiskelija, rumpali.',
+  developerJussiText: 'Tietotekniikan opiskelija, asiakaspalvelun ja myynnin ammattilainen, joka pelaa aina joukkueelle.',
+
   login: 'Kirjaudu',
   logout:'Kirjaudu ulos',
   signup: 'Rekisteröidy',

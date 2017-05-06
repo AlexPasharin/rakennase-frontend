@@ -1,4 +1,26 @@
 export default {
+  frontpageHeader: 'Say hello to a more energetic life!',
+  frontpageSubheader: 'Join us and you will be a step closer to the body of your dreams',
+  frontpageMainText: `Our service “Rakenna Se” offers you the opportunity and helps you
+                      to build your dream body or at least a gives you reason
+                      to pull yourself up from a couch for a jog.
+                      The service offers a wide-ranging and versatile fitness calendar
+                      in which you can add exactly the work-outs you want.
+                      Alternatively you can also select one of our
+                      carefully designed training routines to your liking.
+                      The service supports your progress whether you are a bodybuilder
+                      or a couch potato, who acknowledges the benefits of an exercise.
+                      Your odds of succeeding are guaranteed to improve with a 100% certainty.`,
+  nutritionTipHeader:  'Meal tip of the week',
+  nutritionTip: `This week's tip is everyone's favorite, tuna salad.
+                  You can get an extra kick out of the salad by adding some hot sauce.
+                  The nutritious value of the meal can be improved by adding pasta into the mix.
+                  Due to its versatility this dish is well suited for households
+                  where dietary differences are diverse.`,
+  developersHeader: 'Developers',
+  developersGeneralText: 'We are Information Technology students interested in sports, more or less.',
+  developerAlexText: 'Mathematician, programmer, student, drummer.',
+
   login: 'Log in',
   logout:'Log out',
   signup: 'Sign up',

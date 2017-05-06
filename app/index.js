@@ -3,7 +3,7 @@ import ReactDom from 'react-dom'
 import moment from 'moment'
 
 import Header from './components/Header'
-import Frontpage from './components/Frontpage'
+import Frontpage from './components/frontpage/Frontpage'
 import LoginContainer from './containers/LoginContainer'
 import SignUpFormContainer from './containers/SignUpFormContainer'
 import CalendarContainer from './containers/CalendarContainer'
@@ -37,7 +37,7 @@ class App extends React.Component{
       today,
       username: 'alex',
       userId: 13,
-      lang: 'us',
+      lang: 'fi',
       mode: 'frontpage',
       userExercises: [],
       chosenDayExercises: {day: today, exercises: []},
@@ -126,7 +126,7 @@ class App extends React.Component{
           onUserExercisesChange = {this.onUserExercisesChange}
         />
         {mode === 'frontpage' &&
-          <Frontpage />
+          <Frontpage dict = {dict}/>
         }
         {mode === 'login' &&
           <LoginContainer
