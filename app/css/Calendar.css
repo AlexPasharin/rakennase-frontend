@@ -62,8 +62,14 @@
 }
 
 .dayProgramHeaderText{
-  margin-left: 10px;
-  margin-right: 10px;
+  width: 20%;
   font-weight: bold;
-  display:inline-block;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .dayProgramHeaderText{
+    width: 60%;
+  }
 }

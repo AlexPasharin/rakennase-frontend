@@ -34,19 +34,19 @@ function DayExercises(props) {
 
   const title = (
     <div className = "text-center">
+      <span className = "dayProgramHeaderText">{programDayText}</span>
+      <div>
       <OverLayTrigger placement = "top" overlay = {prevTooltip}>
         <Glyphicon glyph = "arrow-left" onClick = {props.onPrevDay}/>
       </OverLayTrigger>
-      <div className = "dayProgramHeaderText">
-        <Col sm = {6}>{programDayText}</Col>
-        <Col sm = {6}></Col>{dayText}</Col>
-      </div>
+      <span className = "dayProgramHeaderText">{dayText}</span>
       <OverLayTrigger placement = "top" overlay = {nextTooltip}>
         <Glyphicon glyph = "arrow-right" onClick = {props.onNextDay} />
       </OverLayTrigger>
-    <span className="pull-right clickable" onClick = {() => $('#dayExercises').slideUp()}>
+    <span className="pull-right clickable" onClick = {() => $('#dayExercises').slideUp("slow")}>
       <i className="fa fa-times"></i>
     </span>
+    </div>
     </div>
   )
 

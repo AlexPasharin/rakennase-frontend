@@ -188,8 +188,8 @@ class CalendarContainer extends React.Component {
       }
 
       if(!day){
-        $('#dayExercises').slideUp()
-        $('html,body').scrollTop(0) // jumps to the top of the page
+        $('#dayExercises').slideUp("slow", () => $('html,body').scrollTop(0))
+         // jumps to the top of the page
       }
 
       this.setState({month: prevMonth, year: prevYear}, () => this.getUserExercises(day))
@@ -205,8 +205,8 @@ class CalendarContainer extends React.Component {
       }
 
       if(!day){
-        $('#dayExercises').slideUp()
-        $('html,body').scrollTop(0) // jumps to the top of the page
+        $('#dayExercises').slideUp("slow", () => $('html,body').scrollTop(0))
+         // jumps to the top of the page
       }
 
       this.setState({month: nextMonth, year: nextYear}, () => this.getUserExercises(day))
