@@ -88,8 +88,8 @@ class App extends React.Component{
 
         success: function(result){
           console.log(result)
-            if(result.hasOwnProperty(exerciseId)){
-              this.addExerciseInTheState(sport, time, result.exerciseId)
+            if(result[0].hasOwnProperty('exerciseId')){
+              addInTheState(sport, time, result[0].exerciseId)
             }
             else{/*console.log("something's wrong")*/}
         },
