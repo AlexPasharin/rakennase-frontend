@@ -16,8 +16,10 @@ export default {
                   sopii hyvin talouksiin missä ruokavaliot poikkeavat toisistaan.`,
   developersHeader: 'Kehittäjät',
   developersGeneralText: 'Olemme enemmän tai vähemmän urheilusta kiinnostuneita tietotekniikan opiskelijoita.',
-  developerAlexText: 'Matemaatikko, koodari, opiskelija, rumpali.',
+  developerAlexText: 'Matemaatikko, koodari, opiskelija, rumpali. Hieno jätkä.',
   developerJussiText: 'Tietotekniikan opiskelija, asiakaspalvelun ja myynnin ammattilainen, joka pelaa aina joukkueelle.',
+  developerMikkoText: 'Opiskelija, koodari, graafikko, yrittäjä - monen alan taitaja.',
+  developerTuomasText: 'Informaatioteknologian harrastaja ja tuleva ammattilainen.',
 
   login: 'Kirjaudu',
   logout:'Kirjaudu ulos',
@@ -69,6 +71,9 @@ export default {
   update: 'Muokkaa',
   changeExerciseTime: 'Muuta aika',
   ready: 'Valmis',
+  emptyExercise: 'Harjotuksen nimi ei voi olla tyhjä!',
+  badTimeFormat: 'Anna aika muodossa HH:MM tai HH.MM',
+  timeTaken: 'Sinulla on jo ohjelmaa tähän aikaan',
 
   addExercise: 'Lisää uusi harjoitus: ',
   exerciseName: 'Harjoituksen nimi: ',

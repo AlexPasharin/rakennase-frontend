@@ -12,9 +12,15 @@ import Row from 'react-bootstrap/lib/Row'
 
 function ExerciseAdd(props){
 
-  const {dict, exercise, time, onExerciseChange, onTimeChange, onSubmit} = props
+  const {dict, exercise, time, emptyExercise, badTimeFormat, timeTaken, onExerciseChange, onTimeChange, onSubmit} = props
 
     const onFocus = () => {}
+
+    const exerciseErrorText = emptyExercise ? dict.emptyExercise : ''
+
+    let errorText = ''
+    if(badTimeFormat) errorText = dict.badTimeFormat
+    else if(timeTaken) errorText = dict.timeTaken
 
   return(
     <Grid>
@@ -27,6 +33,7 @@ function ExerciseAdd(props){
         </Col>
         <Col sm={5}>
           <FormControl
+            className = {emptyExercise ? 'error_msn' : ''}
             type={'text'}
             value = {exercise}
             placeholder = {dict.exerciseExample}
@@ -36,6 +43,11 @@ function ExerciseAdd(props){
           />
         </Col>
       </FormGroup>
+      <Col sm={5} >
+        <span className = "error_msn">
+          {exerciseErrorText}
+        </span>
+      </Col>
           </Row>
 
           <Row>
@@ -45,6 +57,7 @@ function ExerciseAdd(props){
         </Col>
         <Col sm={5} >
           <FormControl
+            className = {(badTimeFormat || timeTaken) ? 'error_msn' : ''}
             type={'text'}
             value = {time}
             placeholder = {dict.timeExample}
@@ -54,10 +67,13 @@ function ExerciseAdd(props){
           />
         </Col>
       </FormGroup>
+      <Col sm={5} >
+        <span className = "error_msn">
+          {errorText}
+        </span>
+      </Col>
 
           </Row>
-
-        <div className="form-group" id = "exercise_submit_error_msn"> </div>
 
       <Button bsStyle="default" onClick={onSubmit}>{dict.submitExercise}</Button>
       </Grid>

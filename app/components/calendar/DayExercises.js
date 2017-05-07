@@ -4,7 +4,7 @@ import Panel from 'react-bootstrap/lib/Panel'
 import PanelExercise from './PanelExercise'
 import ExerciseAddContainer from '../../containers/ExerciseAddContainer'
 
-import {weekDay} from './utils'
+import {weekDay, timeTaken} from './utils'
 
 function DayExercises(props) {
 
@@ -22,13 +22,6 @@ function DayExercises(props) {
     </h1>
   )
 
-  const timeTaken = (time, index) => {
-    for(var i = 0; i < exercises.length; i++){
-      if(i !== index && exercises[i].time === time) return true
-    }
-    return false
-  }
-
   return (
     <Panel id = "dayExercises" header = {title}>
       <Grid>
@@ -40,13 +33,16 @@ function DayExercises(props) {
                 time={exercise.time}
                 sport={exercise.sport}
                 dict={props.dict}
-                changeExerciseTime={(newTime) => props.changeExerciseTime(index, newTime, exercise.exerciseId)}
+                changeExerciseTime={newTime => props.changeExerciseTime(index, newTime, exercise.exerciseId)}
                 removeExercise={() => props.removeExercise(index, exercise.exerciseId)}
-                timeTaken={(time) => timeTaken(time, index)}
+                timeTaken={time => timeTaken(exercises, time, index)}
               />
           )}
       </Grid>
-        <ExerciseAddContainer dict={props.dict} addExercise={props.addExercise} />
+        <ExerciseAddContainer
+          dict={props.dict}
+          exercises = {exercises}
+          addExercise={props.addExercise} />
     </Panel>
   )
 }

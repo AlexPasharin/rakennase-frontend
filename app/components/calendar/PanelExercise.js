@@ -13,38 +13,44 @@ class PanelExercise extends React.Component{
     super(props)
     this.state = {
       updateMode: false,
-      time: this.props.time
+      time: this.props.time.slice(), // copy of the string
+      error: '',
+      updateText: true
     }
   }
 
   render(){
-    const {updateMode, time} = this.state
+    const {updateMode, time, error, updateText} = this.state
     const {sport, dict, changeExerciseTime, removeExercise, timeTaken} = this.props
 
-    const onUpdateModeChange = newMode => {
-      this.setState({updateMode: newMode})
+    const allowChangeTime = event => {
+      $('.changeTimeButton').blur()
+      this.setState({updateMode: true})
     }
 
     const onTimeChange = event => {
       this.setState({time: event.target.value})
     }
 
+    const onFocus = () => {this.setState({updateText: true})}
+
     const updateTime = event => {
+      this.setState({error: ''})
       const newTime = checkTime(this.state.time)
 
       if(newTime === false){
-        console.log("Anna aika muodossa HH:MM tai HH.MM")
+        this.setState({error: 'badTimeFormat', updateText: false})
         return
       }
       if(newTime === this.props.time){
-        onUpdateModeChange(false)
+        this.setState({updateMode: false})
         return
       }
       if(timeTaken(newTime)){
-        console.log("Sinulla on jo ohjelmaa tähän aikaan")
+        this.setState({error: 'timeTaken', updateText: false})
         return
       }
-      onUpdateModeChange(false)
+      this.setState({updateMode: false})
       changeExerciseTime(newTime)
     }
 
@@ -53,9 +59,12 @@ class PanelExercise extends React.Component{
         <Col sm={2}>
           { updateMode ?
             <FormControl
+              className = {error && !updateText ? 'update_field error_msn': 'update_field'}
               type = "text"
               value = {time}
               onChange = {onTimeChange}
+              onFocus = {onFocus}
+              autoFocus
             /> :
             <time dateTime = {time}>{time}</time>
           }
@@ -69,7 +78,7 @@ class PanelExercise extends React.Component{
            >
             {dict.ready}
           </Button>) :
-          (<Button onClick = {() =>  onUpdateModeChange(true)}>
+          (<Button className = "changeTimeButton" onClick = {allowChangeTime}>
             {dict.changeExerciseTime}
           </Button>)
         }
@@ -78,6 +87,14 @@ class PanelExercise extends React.Component{
           <Button onClick = {removeExercise}>
             {dict.remove}
           </Button>
+        </Col>
+        <Col sm={4}>
+          {error === 'badTimeFormat' &&
+            <span className="error_msn">{dict.badTimeFormat}</span>
+          }
+          {error === 'timeTaken' &&
+            <span className="error_msn">{dict.timeTaken}</span>
+          }
         </Col>
       </Row>
     )

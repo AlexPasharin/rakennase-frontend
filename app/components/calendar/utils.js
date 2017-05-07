@@ -17,3 +17,12 @@ export const checkTime = (time) => {
 
   return time
 }
+
+export const timeTaken = (exercises, time, index) => {
+  console.log(index)
+  for(let i = 0; i < exercises.length; i++){
+    console.log(i !== index)
+    if(i !== index && exercises[i].time === time) return true
+  }
+  return false
+}

@@ -6,3 +6,8 @@ body{
 #brand{
   cursor: pointer;
 }
+
+.error_msn{
+    color: red;
+    font-size: 120%;
+}

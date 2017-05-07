@@ -7,8 +7,6 @@
   visibility: visible;
 }
 
-
-
 /* Name of the month and year area */
 #calendar-header{
     font-weight: bold;
@@ -51,11 +49,3 @@
    #prev-month span{ float:left;}
    #next-month span{float:right;}
 }
-
-#chosen_exercise_error_msn, #exercise_submit_error_msn, .time-update-error-msn{
-    color:red;
-    font-size:150%;
-}
-
-.modal { overflow: visible; }
-.modal-body { overflow-y: visible !important; }

@@ -10,7 +10,6 @@ import CalendarContainer from './containers/CalendarContainer'
 
 import fi from './intl/fi'
 import en from './intl/en'
-import {checkTime} from './components/calendar/utils'
 
 global.jQuery = global.$ = require('jquery')
 
@@ -24,6 +23,11 @@ require('bootstrap')
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip()
     $('body').css('padding-top', parseInt($('#nav_bar').css("height"))+10)
+    $('document').on('blur', '.changeTimeButton', function () {
+        console.log("yes")
+        $('.update_field').focus()
+    })
+
 })
 
 $(window).resize(function () {
@@ -70,8 +74,7 @@ class App extends React.Component{
     this.unhideCalendar = () => this.setState({showCalendar: true})
 
     this.addExercise = (sport, time) => {
-      time = checkTime(time)
-      if(!time) return
+      if(!sport) return
 
       const {userId, chosenDayExercises} = this.state
       const date = chosenDayExercises.day.format('DD.MM.YYYY')
@@ -148,6 +151,7 @@ class App extends React.Component{
         <Header
           mode = {mode}
           dict = {dict}
+          lang = {lang}
           onLangChange = {this.onLangChange}
           onModeChange = {this.onModeChange}
           onUserExercisesChange = {this.onUserExercisesChange}

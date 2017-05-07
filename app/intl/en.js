@@ -19,7 +19,10 @@ export default {
                   where dietary differences are diverse.`,
   developersHeader: 'Developers',
   developersGeneralText: 'We are Information Technology students interested in sports, more or less.',
-  developerAlexText: 'Mathematician, programmer, student, drummer.',
+  developerAlexText: 'Mathematician, programmer, student, drummer. Great guy.',
+  developerJussiText: 'A student of information technology, a customer service and sales professional who always plays for the team.',
+  developerMikkoText: 'A student, coder, graphic designer, entrepreneur - jack of all trades.',
+  developerTuomasText: 'Information technology hobbyist and future professional.',
 
   login: 'Log in',
   logout:'Log out',
@@ -71,6 +74,9 @@ export default {
   update: 'Update',
   changeExerciseTime: 'Change time',
   ready: 'Ready',
+  emptyExercise: 'Exercise name cannot be empty!',
+  badTimeFormat: 'Give time in the form HH:MM or HH.MM',
+  timeTaken: 'You already have a program at this time',
 
   addExercise: 'Add new exercise: ',
   exerciseName: 'Name of the exercise: ',

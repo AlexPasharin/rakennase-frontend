@@ -8,9 +8,9 @@ function Frontpage(props){
 
   const developers = [
     {name: 'Aleksandr Pasharin', photoSrc: '../kuvat/profile_alex.jpg', textIndex: 'Alex'},
-    {name: 'Mikko Saarinen', photoSrc: '../kuvat/profile_mikko.jpg', textIndex: ''},
+    {name: 'Mikko Saarinen', photoSrc: '../kuvat/profile_mikko.jpg', textIndex: 'Mikko'},
     {name: 'Jussi Selänen', photoSrc: '../kuvat/profile_jussi.jpg', textIndex: 'Jussi'},
-    {name: 'Tuomas Huttunen', photoSrc: '', textIndex: ''},
+    {name: 'Tuomas Huttunen', photoSrc: '../kuvat/profile_tuomas.jpg', textIndex: 'Tuomas'},
   ]
 
   return (
