@@ -7,7 +7,7 @@ import NavItem from 'react-bootstrap/lib/NavItem'
 
 function Header(props){
 
-  const {mode, dict, lang, onLangChange, onModeChange, onUserExercisesChange} = props
+  const {mode, dict, lang, onLangChange, onModeChange} = props
 
   const changeLanguage = newLang => {return () => onLangChange(newLang)}
 
@@ -32,7 +32,6 @@ function Header(props){
               }
               {mode === 'calendar' &&
               <NavItem onClick = {() => {
-                            onUserExercisesChange([])
                             onModeChange('frontpage')
                           }}>
                 <Glyphicon glyph="log-out"/>{' ' + dict.logout}
@@ -48,32 +47,6 @@ function Header(props){
         </Navbar.Collapse>
     </Navbar>
   )
-
-  function buttonFactory(){
-    switch(mode){
-      case('login'):
-          return <NavItem onClick = {changeMode('signup')}><Glyphicon glyph="user"/>{' ' + dict.signup}</NavItem>
-      case('calendar'):
-          return <NavItem
-                    onClick = {() => {
-                      onUserExercisesChange([])
-                      onModeChange('login')
-                    }}>
-                    <Glyphicon glyph="log-out"/>{' ' + dict.logout}</NavItem>
-      case('frontpage'):
-        return (
-          <div>
-          <NavItem onClick = {changeMode('login')}><Glyphicon glyph="log-in"/>{' ' + dict.login}</NavItem>
-          <NavItem onClick = {changeMode('signup')}><Glyphicon glyph="user"/>{' ' + dict.signup}</NavItem>
-          </div>
-        )
-      case('signup'):
-          return <NavItem onClick = {changeMode('login')}><Glyphicon glyph="log-in"/>{' ' + dict.login}</NavItem>
-      default:
-          return null
-    }
-  }
-
 }
 
 export default Header

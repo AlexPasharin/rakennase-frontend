@@ -23,7 +23,7 @@ function ExerciseAdd(props){
     else if(timeTaken) errorText = dict.timeTaken
 
   return(
-    <Grid>
+    <Grid id = "newExerciseSubmit">
       <h1>{dict.addExercise}</h1>
 
     <Row>
@@ -43,13 +43,10 @@ function ExerciseAdd(props){
           />
         </Col>
       </FormGroup>
-      <Col sm={5} >
-        <span className = "error_msn">
-          {exerciseErrorText}
-        </span>
-      </Col>
           </Row>
-
+            <div className = "error_msn">
+              {exerciseErrorText}
+            </div>
           <Row>
       <FormGroup>
         <Col sm={2}>
@@ -67,13 +64,10 @@ function ExerciseAdd(props){
           />
         </Col>
       </FormGroup>
-      <Col sm={5} >
-        <span className = "error_msn">
-          {errorText}
-        </span>
-      </Col>
-
           </Row>
+        <div className = "error_msn">
+          {errorText}
+        </div>
 
       <Button bsStyle="default" onClick={onSubmit}>{dict.submitExercise}</Button>
       </Grid>

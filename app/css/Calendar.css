@@ -49,3 +49,21 @@
    #prev-month span{ float:left;}
    #next-month span{float:right;}
 }
+
+.panel_exercise_line{
+  display: flex;
+  margin-bottom: 15px;
+  justify-content: space-between;
+  text-align: right;
+}
+
+#newExerciseSubmit div{
+  margin-bottom: 5px;
+}
+
+.dayProgramHeaderText{
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+  display:inline-block;
+}

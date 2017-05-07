@@ -3,6 +3,7 @@ import React from 'react'
 import Button from 'react-bootstrap/lib/Button'
 import Col from 'react-bootstrap/lib/Col'
 import FormControl from 'react-bootstrap/lib/FormControl'
+import Grid from 'react-bootstrap/lib/Grid'
 import Row from 'react-bootstrap/lib/Row'
 
 import {checkTime} from './utils'
@@ -34,7 +35,7 @@ class PanelExercise extends React.Component{
 
     const onFocus = () => {this.setState({updateText: true})}
 
-    const updateTime = event => {
+    const updateTime = () => {
       this.setState({error: ''})
       const newTime = checkTime(this.state.time)
 
@@ -43,20 +44,21 @@ class PanelExercise extends React.Component{
         return
       }
       if(newTime === this.props.time){
-        this.setState({updateMode: false})
+        this.setState({updateMode: false, time: newTime})
         return
       }
       if(timeTaken(newTime)){
         this.setState({error: 'timeTaken', updateText: false})
         return
       }
-      this.setState({updateMode: false})
+      this.setState({updateMode: false, time: newTime})
       changeExerciseTime(newTime)
     }
 
     return(
+      <div>
       <Row>
-        <Col sm={2}>
+        <Col sm = {4} xs = {5} className = "panel_exercise_line">
           { updateMode ?
             <FormControl
               className = {error && !updateText ? 'update_field error_msn': 'update_field'}
@@ -68,11 +70,9 @@ class PanelExercise extends React.Component{
             /> :
             <time dateTime = {time}>{time}</time>
           }
-        </Col>
-        <Col sm={2}>
           <span>{sport}</span>
-        </Col>
-        <Col sm={2}>
+          </Col>
+        <Col sm = {6} xs = {7} className = "panel_exercise_line">
         { updateMode ?
           (<Button onClick = {updateTime}
            >
@@ -82,21 +82,20 @@ class PanelExercise extends React.Component{
             {dict.changeExerciseTime}
           </Button>)
         }
-        </Col>
-        <Col sm={2}>
+
           <Button onClick = {removeExercise}>
             {dict.remove}
           </Button>
         </Col>
-        <Col sm={4}>
-          {error === 'badTimeFormat' &&
-            <span className="error_msn">{dict.badTimeFormat}</span>
-          }
-          {error === 'timeTaken' &&
-            <span className="error_msn">{dict.timeTaken}</span>
-          }
-        </Col>
-      </Row>
+        </Row>
+        {error === 'badTimeFormat' &&
+          <span className="error_msn">{dict.badTimeFormat}</span>
+        }
+        {error === 'timeTaken' &&
+          <span className="error_msn">{dict.timeTaken}</span>
+        }
+        </div>
+
     )
   }
 }

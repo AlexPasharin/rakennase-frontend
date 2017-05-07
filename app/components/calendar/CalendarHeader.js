@@ -34,7 +34,7 @@ function CalendarHeader(props){
     <Grid>
       <Row id= "calendar-header">
 
-        <Col xs={3} id = "prev-month" onClick = {onPrevMonth}>
+        <Col xs={3} id = "prev-month" onClick = {(e) => onPrevMonth()}>
           <OverLayTrigger placement = "left" overlay = {prevTooltip}>
             <Glyphicon glyph = "chevron-left"/>
           </OverLayTrigger>
@@ -44,7 +44,7 @@ function CalendarHeader(props){
           {dict.monthes[month] + ' ' + year}
         </Col>
 
-        <Col xs={3} id = "next-month" onClick = {onNextMonth}>
+        <Col xs={3} id = "next-month" onClick = {(e) => onNextMonth()}>
           <OverLayTrigger placement = "right" overlay = {nextTooltip}>
             <Glyphicon glyph = "chevron-right"/>
           </OverLayTrigger>

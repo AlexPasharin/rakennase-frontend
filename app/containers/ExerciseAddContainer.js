@@ -42,8 +42,10 @@ class ExerciseAddContainer extends React.Component{
         this.setState({badTimeFormatError: true})
       } else if(timeTaken(exercises, timeToSubmit)){
         this.setState({timeTakenError: true})
-      }else {
-        addExercise(exercise, timeToSubmit)
+      }else if(exercise){
+        const newExercise = exercise
+        this.setState({exercise: '', time: ''})
+        addExercise(newExercise, timeToSubmit)
       }
     }
 

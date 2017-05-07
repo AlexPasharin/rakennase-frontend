@@ -44,8 +44,6 @@ class App extends React.Component{
       userId: 13,
       lang: 'fi',
       mode: 'frontpage',
-      userExercises: [],
-      chosenDayExercises: {day: today, exercises: []},
       showCalendar: false
     }
 
@@ -60,90 +58,12 @@ class App extends React.Component{
     this.onLogin = (username, userId) => {
       this.setState({username, userId}, () => this.onModeChange('calendar'))
     }
-
-    this.onDayChange = (day, callback) => {
-      let dayExercises = this.state.userExercises.find(obj => obj.date === day.format("DD.MM.YYYY"))
-      dayExercises = dayExercises ? dayExercises.exercises : []
-
-      this.setState({chosenDayExercises: {day, exercises: dayExercises}}, callback)
-    }
-
-    this.onUserExercisesChange = (exercises, callback) =>
-      this.setState({userExercises: exercises}, callback)
-
+    
     this.unhideCalendar = () => this.setState({showCalendar: true})
-
-    this.addExercise = (sport, time) => {
-      if(!sport) return
-
-      const {userId, chosenDayExercises} = this.state
-      const date = chosenDayExercises.day.format('DD.MM.YYYY')
-      const addInTheState = id => {this.addExerciseInTheState(sport, time, id)}
-
-      const data = "userId=" + userId + "&exerciseName=" + sport + "&date=" + date + "&time=" + time
-      console.log(data)
-
-      $.ajax({
-        method: 'POST',
-        url: rootUrl + "saveExerciseSimple",
-        data: data,
-        dataType: 'json',
-
-        success: function(result){
-          console.log(result)
-            if(result[0].hasOwnProperty('exerciseId')){
-              addInTheState(sport, time, result[0].exerciseId)
-            }
-            else{/*console.log("something's wrong")*/}
-        },
-        error: function(){
-          console.log("error")
-        }
-      })
-    }
-
-    this.removeExercise = (index, exerciseId) => {
-      const removeFromTheState = () => this.removeExerciseFromTheState(index)
-
-      $.ajax({
-        method: 'POST',
-        url: rootUrl + "deleteExercise",
-        data: "userId=" + this.state.userId + "&exerciseId=" + exerciseId,
-        dataType: 'json',
-
-        success: function(result){
-            if(result.success === '1'){removeFromTheState()}
-            else{/*console.log("something's wrong")*/}
-        }
-      })
-    }
-
-    this.changeExerciseTime = (index, newTime, exerciseId) => {
-      const changeInTheState = () => this.changeExerciseTimeInTheState(index, newTime)
-      const date = this.state.chosenDayExercises.day.format('DD.MM.YYYY')
-
-      $.ajax({
-        method: 'POST',
-        url: rootUrl + "updateExerciseTime",
-        data: "userId=" + this.state.userId + "&exerciseId=" + exerciseId + "&time=" + newTime + "&date=" + date,
-        dataType: 'json',
-
-        success: function(result){
-          if(result.success === '1'){
-            changeInTheState()
-          }else if(result.badTimeFormat){
-            console.log("Anna aika muodossa HH:MM tai HH.MM")
-          }else if(result.timeTaken){
-            console.log("Sinulla on jo ohjelmaa tähän aikaan")
-          }
-        }
-      })
-    }
-
   }
 
   render() {
-    const {username, userId, mode, lang, userExercises, today, chosenDayExercises, showCalendar} = this.state
+    const {username, userId, mode, lang, today, showCalendar} = this.state
     const dict = (this.state.lang === 'us') ? en : fi
 
     return(
@@ -154,7 +74,6 @@ class App extends React.Component{
           lang = {lang}
           onLangChange = {this.onLangChange}
           onModeChange = {this.onModeChange}
-          onUserExercisesChange = {this.onUserExercisesChange}
         />
         {mode === 'frontpage' &&
           <Frontpage dict = {dict}/>
@@ -184,84 +103,12 @@ class App extends React.Component{
             lang = {lang}
             dict = {dict}
             today = {today}
-            userExercises = {userExercises}
-            chosenDayExercises = {chosenDayExercises}
-            onUserExercisesChange = {this.onUserExercisesChange}
-            onDayChange = {this.onDayChange}
             unhideCalendar = {this.unhideCalendar}
-            addExercise={this.addExercise}
-            changeExerciseTime = {this.changeExerciseTime}
-            removeExercise = {this.removeExercise}
           />
         }
       </div>
     )
   }
-
-  addExerciseInTheState(sport, time, id){
-    const newExercises = this.state.chosenDayExercises.exercises.slice()
-
-    for(var i = 0; i < newExercises.length; i++){
-      if(newExercises[i].time > time){
-        break
-      }
-    }
-    newExercises.splice(i, 0, {sport, time, exerciseId: id})
-
-    const day = this.state.chosenDayExercises.day
-    const newUserExercises = this.state.userExercises.slice()
-    let newDayExercises = newUserExercises.find(obj => obj.date === day.format("DD.MM.YYYY"))
-
-     if(newDayExercises) Object.assign(newDayExercises, {exercises: newExercises})
-     else{
-       newDayExercises = {date: day.format("DD.MM.YYYY"), exercises: []}
-       newUserExercises.push(newDayExercises)
-     }
-
-    this.setState(prevState => ({
-      chosenDayExercises: Object.assign(prevState.chosenDayExercises, {exercises: newExercises}),
-      userExercises: newUserExercises
-    }))
-  }
-
-  removeExerciseFromTheState(index){
-    const newExercises = this.state.chosenDayExercises.exercises.slice()
-    newExercises.splice(index, 1)
-
-    const day = this.state.chosenDayExercises.day
-    const newUserExercises = this.state.userExercises.slice()
-    let newDayExercises = newUserExercises.find(obj => obj.date === day.format("DD.MM.YYYY"))
-    Object.assign(newDayExercises, {exercises: newExercises})
-
-    this.setState(prevState => ({
-      chosenDayExercises: Object.assign(prevState.chosenDayExercises, {exercises: newExercises}),
-      userExercises: newUserExercises
-    }))
-  }
-
-  changeExerciseTimeInTheState(index, newTime){
-    const newExercises = this.state.chosenDayExercises.exercises.slice()
-    const newExercise = Object.assign(newExercises[index], {time: newTime})
-    newExercises.splice(index, 1)
-
-    for(var i = 0; i < newExercises.length; i++){
-      if(newExercises[i].time > newTime){
-        break
-      }
-    }
-    newExercises.splice(i, 0, newExercise)
-
-    const day = this.state.chosenDayExercises.day
-    const newUserExercises = this.state.userExercises.slice()
-    let newDayExercises = newUserExercises.find(obj => obj.date === day.format("DD.MM.YYYY"))
-    Object.assign(newDayExercises, {exercises: newExercises})
-
-    this.setState(prevState => ({
-      chosenDayExercises: Object.assign(prevState.chosenDayExercises, {exercises: newExercises}),
-      userExercises: newUserExercises
-    }))
-  }
-
 }
 
 ReactDom.render(
